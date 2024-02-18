@@ -24,3 +24,12 @@ jobs:
         with:
           path: ${{ env.ZIP_FILE }}
           name: ${{ env.ZIP_FILE }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: CI Release
+          draft: false
+          prerelease: true
