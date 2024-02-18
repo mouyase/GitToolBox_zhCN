@@ -1,0 +1,3 @@
+files:
+  - source: '*.properties'
+    translation: '%original_file_name%'
