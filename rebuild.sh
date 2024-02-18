@@ -15,6 +15,8 @@ unzip "$zipName"
 
 rm -rf "$zipName"
 
-jar uf gittoolbox/lib/"$jarName" zh/*
+cp -rf zh zielu
+
+jar uf gittoolbox/lib/"$jarName" zielu/*
 
 zip -r "$targetName" gittoolbox/*
