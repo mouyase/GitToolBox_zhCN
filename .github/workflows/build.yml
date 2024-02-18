@@ -21,6 +21,11 @@ jobs:
         run: |
           sh rebuild.sh
           echo "ZIP_FILE=$(find . -name '*.zip' | xargs basename)" >> $GITHUB_ENV
+
+      - name: Create Tag 
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git tag -m "CI Release" -f -a ci-release
           git push -f origin refs/tags/ci-release
 
