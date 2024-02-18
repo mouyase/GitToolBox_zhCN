@@ -21,9 +21,15 @@ jobs:
         run: |
           sh rebuild.sh
           echo "ZIP_FILE=$(find . -name '*.zip' | xargs basename)" >> $GITHUB_ENV
+          git tag -m "CI Release" -f -a ci-release
+          git push -f origin refs/tags/ci-release
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: ${{ env.ZIP_FILE }}
-          generateReleaseNotes: true
+          allowUpdates: true
+          prerelease: true
+          tag: ci-release
+          name: 'CI-Release'
+          body: 'The currently CI Build. Whenever new changes are pushed, you can find the latest build here. You can keep this installation alongside your main one.'
