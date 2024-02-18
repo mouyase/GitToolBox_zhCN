@@ -23,5 +23,3 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: ${{ env.ZIP_FILE }}
-          commit: ${{ github.sha }}
-          tag: ${{ format('v6.{0}.{1}', github.run_number, github.run_attempt) }}
