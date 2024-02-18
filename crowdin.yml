@@ -1,3 +1,5 @@
 files:
-  - source: '*.properties'
-    translation: '%original_path%/%original_file_name%'
+  - source: /en/gittoolbox/ResourceBundle.properties
+    translation: /%two_letters_code%/gittoolbox/ResourceBundle.properties
+  - source: /en/intellij/ZResBundle.properties
+    translation: /%two_letters_code%/intellij/ZResBundle.properties
