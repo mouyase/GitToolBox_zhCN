@@ -13,20 +13,8 @@ wget https://plugins.jetbrains.com/files/7499/487998/"$zipName" -O gittoolbox-"$
 
 unzip "$zipName"
 
+rm -rf "$zipName"
+
 jar uf gittoolbox/lib/"$jarName" zh/*
 
-#unzip "$jarName"
-
-#jar -C origin/ xf gittoolbox/lib/"$jarName"
-
-#cp -rf zh/* origin/*
-#
-#cd origin
-#
-#jar xf "../$jarName" -C origin/
-#
-#cd ..
-#
-#cp -f "$jarName" gittoolbox/lib/"$jarName"
-#
 zip -r "$targetName" gittoolbox/*
