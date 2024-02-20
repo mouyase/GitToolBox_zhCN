@@ -1,20 +1,19 @@
 #!/usr/bin/env sh
 
-file=$(curl "https://plugins.jetbrains.com/api/plugins/7499/updates?channel=&size=8" | jq -r '.[0] | .file')
+json_file_name=version.json
+curl "https://plugins.jetbrains.com/api/plugins/7499/updates?channel=&size=8" -o $json_file_name
 
-version=$(echo $file | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+_[0-9]\+')
-version_jar=$(echo $version | tr '_' '+')
+file_id=$(cat $json_file_name | jq -r '.[0] | .id')
+version_jar=$(cat $json_file_name | jq -r '.[0] | .version')
+version=$(echo $version_jar | tr '+' '_')
  
-echo $version
-echo $version_jar
-
 zipName=gittoolbox-"$version"-signed.zip
 jarName=gittoolbox-"$version_jar".jar
 targetName=gittoolbox-"$version".zip
 
-rm -rf gittoolbox
 
-wget https://plugins.jetbrains.com/files/7499/487998/"$zipName" -O gittoolbox-"$version"-signed.zip
+
+wget "https://plugins.jetbrains.com/plugin/download?rel=true&updateId=$file_id" -O gittoolbox-"$version"-signed.zip
 
 unzip "$zipName"
 
@@ -24,3 +23,9 @@ jar xf gittoolbox/lib/"$jarName"
 
 cp -f zielu/gittoolbox/ResourceBundle.properties en/gittoolbox/ResourceBundle.properties
 cp -f zielu/intellij/ZResBundle.properties en/intellij/ZResBundle.properties
+
+rm -rf gittoolbox
+rm -rf zielu
+rm -rf META-INF
+rm -rf $json_file_name
+rm -rf gittoolbox-"$version"-signed.zip
