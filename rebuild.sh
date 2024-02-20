@@ -27,4 +27,3 @@ rm -rf gittoolbox
 rm -rf zielu
 rm -rf META-INF
 rm -rf $json_file_name
-rm -rf $targetName
