@@ -21,11 +21,8 @@ jobs:
       - name: Build 
         id: Build
         run: |
-          cat $GITHUB_ENV
           sh rebuild.sh
           echo "ZIP_FILE=$(find . -name '*.zip' | xargs basename)" >> $GITHUB_ENV
-          echo 再输出一次
-          cat $GITHUB_ENV
 
       - name: Create Tag 
         run: |
