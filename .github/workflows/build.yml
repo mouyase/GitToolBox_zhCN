@@ -4,6 +4,9 @@ on:
   push:
     branches: [ "l10n_main" ]
 
+env:
+  ZIP_FILE: ''
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,9 +19,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build 
+        id: Build
         run: |
+          echo $GITHUB_ENV
           sh rebuild.sh
           echo "ZIP_FILE=$(find . -name '*.zip' | xargs basename)" >> $GITHUB_ENV
+          echo 再输出一次
+          echo $GITHUB_ENV
 
       - name: Create Tag 
         run: |
@@ -30,7 +37,7 @@ jobs:
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: $GITHUB_ENV.ZIP_FILE
+          artifacts: ${{ env.ZIP_FILE }}
           allowUpdates: true
           prerelease: true
           tag: ci-release
